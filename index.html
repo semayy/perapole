@@ -116,7 +116,7 @@
         <p class="mt-2 text-sm text-neutral-700">PeraPole'nin kilit rakipleri Promena ve JAGGAER ile pazar konumlandırması ve özellik karşılaştırması.</p>
         <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
             <div class="rounded-3xl bg-white/80 p-6 shadow ring-1 ring-black/5 flex justify-center items-center h-full">
-                <div class="chart-container w-full max-w-xl mx-auto h-[400px]">
+                <div class="chart-container w-full max-w-xl mx-auto h-[300px] sm:h-[400px]">
                     <canvas id="benchmarkChart"></canvas>
                 </div>
             </div>
@@ -503,7 +503,6 @@
                     updateUI(data);
                     fillAdminForm(data);
                 } else {
-                    console.log("No such document! Initializing with default data.");
                     const initialData = {
                         logoUrl: '',
                         heroTitle: 'AI Destekli B2B Büyüme: 6 Aylık Dijital Strateji',
