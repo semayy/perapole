@@ -18,9 +18,37 @@
         html {
             scroll-behavior: smooth;
         }
+        /* Mobile menu styles */
+        .mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
     </style>
 </head>
 <body class="bg-[radial-gradient(1000px_600px_at_10%_0%,#e9d5ff_0%,transparent_40%),radial-gradient(800px_500px_at_90%_10%,#a7f3d0_0%,transparent_40%),radial-gradient(700px_500px_at=30%_90%,#fecaca_0%,transparent_45%)] text-neutral-900">
+
+    <!-- Mobile Menu Button -->
+    <div class="fixed top-4 right-4 z-50 sm:hidden">
+        <button id="mobile-menu-toggle" class="p-2 rounded-full bg-purple-600 text-white shadow-lg focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="mobile-menu fixed inset-0 z-40 bg-black bg-opacity-80 flex flex-col items-center justify-center p-8">
+        <a href="#KPI" class="text-white text-lg font-bold my-2" onclick="document.getElementById('mobile-menu-overlay').classList.remove('open')">KPI</a>
+        <a href="#Benchmark" class="text-white text-lg font-bold my-2" onclick="document.getElementById('mobile-menu-overlay').classList.remove('open')">Benchmark</a>
+        <a href="#Yol_Haritasi" class="text-white text-lg font-bold my-2" onclick="document.getElementById('mobile-menu-overlay').classList.remove('open')">Yol Haritası</a>
+        <a href="#Haftalik" class="text-white text-lg font-bold my-2" onclick="document.getElementById('mobile-menu-overlay').classList.remove('open')">Haftalık</a>
+        <a href="#SWOT" class="text-white text-lg font-bold my-2" onclick="document.getElementById('mobile-menu-overlay').classList.remove('open')">SWOT</a>
+        <a href="#RACI" class="text-white text-lg font-bold my-2" onclick="document.getElementById('mobile-menu-overlay').classList.remove('open')">RACI</a>
+        <button id="admin-panel-toggle-mobile" class="mt-4 px-4 py-2 rounded-full bg-purple-600 text-white text-lg font-bold shadow-lg focus:outline-none">Yönetim Paneli</button>
+    </div>
 
     <div class="sticky top-0 z-10 backdrop-blur supports-[backdrop-filter]:bg-white/60">
         <nav class="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
@@ -28,13 +56,13 @@
                 <img id="logo-display" src="" alt="PeraPole Logo" class="h-8 w-auto">
                 <span class="text-sm font-semibold tracking-tight">PeraPole – Stratejik Plan</span>
             </div>
-            <div class="flex items-center gap-2">
-                <a href="#KPI" class="hidden sm:inline-flex rounded-full bg-white/70 px-3 py-1 text-xs font-medium shadow hover:bg-white">KPI</a>
-                <a href="#Benchmark" class="hidden sm:inline-flex rounded-full bg-white/70 px-3 py-1 text-xs font-medium shadow hover:bg-white">Benchmark</a>
-                <a href="#Yol_Haritasi" class="hidden sm:inline-flex rounded-full bg-white/70 px-3 py-1 text-xs font-medium shadow hover:bg-white">Yol Haritası</a>
-                <a href="#Haftalik" class="hidden sm:inline-flex rounded-full bg-white/70 px-3 py-1 text-xs font-medium shadow hover:bg-white">Haftalık</a>
-                <a href="#SWOT" class="hidden sm:inline-flex rounded-full bg-white/70 px-3 py-1 text-xs font-medium shadow hover:bg-white">SWOT</a>
-                <a href="#RACI" class="hidden sm:inline-flex rounded-full bg-white/70 px-3 py-1 text-xs font-medium shadow hover:bg-white">RACI</a>
+            <div class="hidden sm:flex items-center gap-2">
+                <a href="#KPI" class="rounded-full bg-white/70 px-3 py-1 text-xs font-medium shadow hover:bg-white">KPI</a>
+                <a href="#Benchmark" class="rounded-full bg-white/70 px-3 py-1 text-xs font-medium shadow hover:bg-white">Benchmark</a>
+                <a href="#Yol_Haritasi" class="rounded-full bg-white/70 px-3 py-1 text-xs font-medium shadow hover:bg-white">Yol Haritası</a>
+                <a href="#Haftalik" class="rounded-full bg-white/70 px-3 py-1 text-xs font-medium shadow hover:bg-white">Haftalık</a>
+                <a href="#SWOT" class="rounded-full bg-white/70 px-3 py-1 text-xs font-medium shadow hover:bg-white">SWOT</a>
+                <a href="#RACI" class="rounded-full bg-white/70 px-3 py-1 text-xs font-medium shadow hover:bg-white">RACI</a>
                 <button id="admin-panel-toggle" class="rounded-full bg-purple-600 text-white px-3 py-1 text-xs font-medium shadow hover:bg-purple-700">Yönetim Paneli</button>
             </div>
         </nav>
@@ -68,44 +96,40 @@
         <h2 class="text-xl font-bold">Temel Performans Göstergeleri (KPI)</h2>
         <p class="mt-2 text-sm text-neutral-700">Stratejimizin başarısını ölçmek ve sürekli optimize etmek için belirlediğimiz temel performans göstergeleri (KPI) aşağıdadır. Bu rakamlar, belirlenen stratejik adımların uygulanması durumunda hedeflenen potansiyel artışları yansıtan tahmini değerlerdir.</p>
         <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4" id="kpi-container">
-            <div class="rounded-3xl bg-white/80 p-6 shadow ring-1 ring-black/5">
-                <div class="flex items-center gap-4">
-                    <div class="bg-gradient-to-r from-purple-500 to-pink-500 w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0 text-white shadow">
-                        <span class="text-xl font-bold" id="kpi1-value">+40-60%</span>
-                    </div>
-                    <div>
-                        <p class="text-lg font-bold" id="kpi1-label">Organik Trafik Artışı</p>
-                        <p class="text-sm text-neutral-600" id="kpi1-note"><strong>Nasıl Artacak:</strong> AI destekli SEO ve pillar/cluster içerik stratejimizle web sitesine çekilecek nitelikli trafik sayesinde hedeflenmektedir.</p>
-                    </div>
+            <div class="rounded-3xl bg-white/80 p-6 shadow ring-1 ring-black/5 flex flex-col md:flex-row items-center gap-4">
+                <div class="bg-gradient-to-r from-purple-500 to-pink-500 w-20 h-20 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center flex-shrink-0 text-white shadow">
+                    <span class="text-xl font-bold" id="kpi1-value">+40-60%</span>
                 </div>
-                <div class="mt-4 flex items-center gap-4">
-                    <div class="bg-gradient-to-r from-sky-500 to-cyan-500 w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0 text-white shadow">
-                        <span class="text-2xl font-bold" id="kpi2-value">&gt;2.5%</span>
-                    </div>
-                    <div>
-                        <p class="text-lg font-bold" id="kpi2-label">LinkedIn Etkileşim Oranı (ER)</p>
-                        <p class="text-sm text-neutral-600" id="kpi2-note"><strong>Nasıl Artacak:</strong> Düşünce liderliği postları, mikro videolar ve çalışan katılımıyla elde edilecek organik erişim artışına dayanmaktadır.</p>
-                    </div>
+                <div class="text-center md:text-left">
+                    <p class="text-lg font-bold" id="kpi1-label">Organik Trafik Artışı</p>
+                    <p class="text-sm text-neutral-600" id="kpi1-note"><strong>Nasıl Artacak:</strong> AI destekli SEO ve pillar/cluster içerik stratejimizle web sitesine çekilecek nitelikli trafik sayesinde hedeflenmektedir.</p>
                 </div>
             </div>
-            <div class="rounded-3xl bg-white/80 p-6 shadow ring-1 ring-black/5">
-                <div class="flex items-center gap-4">
-                    <div class="bg-gradient-to-r from-emerald-500 to-teal-500 w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0 text-white shadow">
-                        <span class="text-xl font-bold" id="kpi3-value">5-8/ay</span>
-                    </div>
-                    <div>
-                        <p class="text-lg font-bold" id="kpi3-label">Nitelikli Talep (MQL)</p>
-                        <p class="text-sm text-neutral-600" id="kpi3-note"><strong>Nasıl Artacak:</strong> Yüksek dönüşüm oranlarına sahip açılış sayfaları ve kanıt odaklı içeriklerle potansiyel müşterilerin hedefe yönlendirilmesiyle hesaplanmıştır.</p>
-                    </div>
+            <div class="rounded-3xl bg-white/80 p-6 shadow ring-1 ring-black/5 flex flex-col md:flex-row items-center gap-4">
+                <div class="bg-gradient-to-r from-sky-500 to-cyan-500 w-20 h-20 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center flex-shrink-0 text-white shadow">
+                    <span class="text-2xl font-bold" id="kpi2-value">&gt;2.5%</span>
                 </div>
-                <div class="mt-4 flex items-center gap-4">
-                    <div class="bg-gradient-to-r from-amber-500 to-orange-500 w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0 text-white shadow">
-                        <span class="text-2xl font-bold" id="kpi4-value">+10</span>
-                    </div>
-                    <div>
-                        <p class="text-lg font-bold" id="kpi4-label">Sıralamada Anahtar Kelime</p>
-                        <p class="text-sm text-neutral-600" id="kpi4-note"><strong>Nasıl Artacak:</strong> AI araçları kullanılarak belirlenen düşük rekabetli, yüksek potansiyelli anahtar kelimelerle sıralama elde etme hedefidir.</p>
-                    </div>
+                <div class="text-center md:text-left">
+                    <p class="text-lg font-bold" id="kpi2-label">LinkedIn Etkileşim Oranı (ER)</p>
+                    <p class="text-sm text-neutral-600" id="kpi2-note"><strong>Nasıl Artacak:</strong> Düşünce liderliği postları, mikro videolar ve çalışan katılımıyla elde edilecek organik erişim artışına dayanmaktadır.</p>
+                </div>
+            </div>
+            <div class="rounded-3xl bg-white/80 p-6 shadow ring-1 ring-black/5 flex flex-col md:flex-row items-center gap-4">
+                <div class="bg-gradient-to-r from-emerald-500 to-teal-500 w-20 h-20 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center flex-shrink-0 text-white shadow">
+                    <span class="text-xl font-bold" id="kpi3-value">5-8/ay</span>
+                </div>
+                <div class="text-center md:text-left">
+                    <p class="text-lg font-bold" id="kpi3-label">Nitelikli Talep (MQL)</p>
+                    <p class="text-sm text-neutral-600" id="kpi3-note"><strong>Nasıl Artacak:</strong> Yüksek dönüşüm oranlarına sahip açılış sayfaları ve kanıt odaklı içeriklerle potansiyel müşterilerin hedefe yönlendirilmesiyle hesaplanmıştır.</p>
+                </div>
+            </div>
+            <div class="rounded-3xl bg-white/80 p-6 shadow ring-1 ring-black/5 flex flex-col md:flex-row items-center gap-4">
+                <div class="bg-gradient-to-r from-amber-500 to-orange-500 w-20 h-20 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center flex-shrink-0 text-white shadow">
+                    <span class="text-2xl font-bold" id="kpi4-value">+10</span>
+                </div>
+                <div class="text-center md:text-left">
+                    <p class="text-lg font-bold" id="kpi4-label">Sıralamada Anahtar Kelime</p>
+                    <p class="text-sm text-neutral-600" id="kpi4-note"><strong>Nasıl Artacak:</strong> AI araçları kullanılarak belirlenen düşük rekabetli, yüksek potansiyelli anahtar kelimelerle sıralama elde etme hedefidir.</p>
                 </div>
             </div>
         </div>
@@ -183,7 +207,7 @@
 
     <section id="Yol_Haritasi" class="mx-auto mt-10 max-w-6xl px-5">
         <h2 class="text-xl font-bold">6 Aylık Yol Haritası</h2>
-        <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3" id="roadmap-container">
+        <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4" id="roadmap-container">
             <div class="rounded-3xl bg-white/80 p-5 shadow ring-1 ring-black/5">
                 <div class="inline-block rounded-full bg-gradient-to-r from-fuchsia-400 to-rose-500 px-3 py-1 text-xs font-semibold text-white">Ay 1 – Strateji & Teknik Temel</div>
                 <ul class="mt-3 space-y-2 text-sm text-neutral-700" id="month1-list">
@@ -470,7 +494,6 @@
                     const userCredential = await signInAnonymously(auth);
                     userId = userCredential.user.uid;
                 }
-                console.log("Firebase Auth successful. User ID:", userId);
                 startFirestoreListener();
             } catch (error) {
                 console.error("Firebase Auth error:", error);
@@ -535,6 +558,11 @@
             document.getElementById('admin-panel').classList.remove('hidden');
         });
 
+        document.getElementById('admin-panel-toggle-mobile').addEventListener('click', () => {
+            document.getElementById('admin-panel').classList.remove('hidden');
+            document.getElementById('mobile-menu-overlay').classList.remove('open');
+        });
+
         document.getElementById('admin-cancel-btn').addEventListener('click', () => {
             document.getElementById('admin-panel').classList.add('hidden');
         });
@@ -555,16 +583,21 @@
             };
             try {
                 await setDoc(docRef, data, { merge: true });
-                alert('İçerik başarıyla güncellendi!');
                 document.getElementById('admin-panel').classList.add('hidden');
             } catch (error) {
                 console.error("Error writing document: ", error);
-                alert('Güncelleme başarısız oldu.');
             }
         });
         
         document.addEventListener('DOMContentLoaded', () => {
             initApp();
+            
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileMenuOverlay.classList.toggle('open');
+            });
             
             const chartData = {
                 labels: ['AI Entegrasyonu', 'Kullanıcı Deneyimi (UX)', 'Geniş Tedarikçi Ağı', 'Özel Alan Uzmanlığı', 'İçerik Pazarlaması'],
